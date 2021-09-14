@@ -13,3 +13,16 @@
 
 (defn atende [hospital departamento]
   (update hospital departamento pop))
+
+(defn proxima
+  [hospital departamento]
+  (-> hospital
+      departamento
+      peek))
+
+(defn transfere
+  [hospital de para]
+  (let [pessoa (proxima hospital de)]
+    (-> hospital
+        (atende de)
+        (chega-em para pessoa))))
