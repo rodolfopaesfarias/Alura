@@ -5,10 +5,10 @@
 
 (defn testa-atomao
   []
-  (let [hospital-farias (atom { :espera h.model/fila_vazia})]
+  (let [hospital-farias (atom { :espera h.model/fila-vazia})]
     (pprint @hospital-farias)
 
-    (swap! hospital-farias assoc :laboratorio1 h.model/fila_vazia)
+    (swap! hospital-farias assoc :laboratorio1 h.model/fila-vazia)
     (pprint @hospital-farias)
 
     (swap! hospital-farias update :espera conj "111")
