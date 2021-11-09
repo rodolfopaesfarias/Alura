@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'byte-bank';
+  transferencia: any;
+
+  transferir($event: any) {
+    this.transferencia = $event;
+  }
 }
