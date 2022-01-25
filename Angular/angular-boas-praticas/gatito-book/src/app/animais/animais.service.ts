@@ -1,26 +1,40 @@
 import { environment } from './../../environments/environment';
-import { TokenService } from './../autenticacao/token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Animais } from './animal';
+import { catchError, mapTo, Observable, of, throwError } from 'rxjs';
+import { Animais, Animal } from './animal';
 
 const URL_API = environment.apiURL;
+const NOT_MODIFIED = '304';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnimaisService {
-  constructor(
-    private httpClient: HttpClient,
-    private tokenService: TokenService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   getListaAnimaisDoUsuario(nomeUsuario: string): Observable<Animais> {
-    const token = this.tokenService.retornarToken();
-    const headers = new HttpHeaders().append('x-access-token', token);
-    return this.httpClient.get<Animais>(`${URL_API}/${nomeUsuario}/photos`, {
-      headers,
-    });
+    return this.httpClient.get<Animais>(`${URL_API}/${nomeUsuario}/photos`);
+  }
+
+  findById(id: number): Observable<Animal> {
+    return this.httpClient.get<Animal>(`${URL_API}/photos/${id}`);
+  }
+
+  excluirAnimal(id: number): Observable<Animal> {
+    return this.httpClient.delete<Animal>(`${URL_API}/photos/${id}`);
+  }
+
+  curtir(id: number): Observable<boolean> {
+    return this.httpClient
+      .post(`${URL_API}/photos/${id}/like`, {}, { observe: 'response' })
+      .pipe(
+        mapTo(true),
+        catchError((error) =>
+          error.status == NOT_MODIFIED
+            ? of(false)
+            : throwError(() => new Error(error))
+        )
+      );
   }
 }
