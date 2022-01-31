@@ -43,8 +43,7 @@ api.addUpload = async (req, res) => {
 
         const image = await jimp.read(req.file.path);
 
-        await image
-            .exifRotate()
+        await image            
             .cover(460, 460)
             .autocrop()
             .write(req.file.path);  
