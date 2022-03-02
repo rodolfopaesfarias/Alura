@@ -4,6 +4,9 @@
   (keydown.esc)="modalRef.close()"
 >
   <div
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="config.title"
     appFocusTrap
     appFocusBack
     class="modal-content"
