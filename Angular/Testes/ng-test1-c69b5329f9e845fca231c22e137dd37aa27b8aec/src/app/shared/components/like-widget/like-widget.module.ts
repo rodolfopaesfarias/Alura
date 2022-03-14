@@ -1,3 +1,4 @@
+import { UniqueIdService } from './../../services/unique-id/unique-id.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -7,6 +8,7 @@ import { LikeWidgetComponent } from './like-widget.component';
   declarations: [LikeWidgetComponent],
   imports: [CommonModule, FontAwesomeModule],
   exports: [LikeWidgetComponent],
+  providers: [UniqueIdService]
 })
 export class LikeWidgetModule {
 
