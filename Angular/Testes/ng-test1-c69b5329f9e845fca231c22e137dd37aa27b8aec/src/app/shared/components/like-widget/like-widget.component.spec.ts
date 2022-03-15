@@ -1,6 +1,7 @@
 import { LikeWidgetModule } from './like-widget.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LikeWidgetComponent } from './like-widget.component';
+
 describe(LikeWidgetComponent.name, () => {
   let fixture: ComponentFixture<LikeWidgetComponent> = null;
   let component: LikeWidgetComponent = null;
