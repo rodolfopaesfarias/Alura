@@ -8,19 +8,8 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { buildPhotoList } from './test/build-photo-list';
 
-function buildPhotoList(): Photo[] {
-  const photos: Photo[] = [];
-  for (let i = 0; i < 8; i++) {
-    photos.push({
-      id: i + 1,
-      url: '',
-      description: '',
-    });
-  }
-
-  return photos;
-}
 
 describe(`${PhotoBoardComponent.name} outros`, () => {
   let fixture: ComponentFixture<PhotoBoardTestComponent>;
